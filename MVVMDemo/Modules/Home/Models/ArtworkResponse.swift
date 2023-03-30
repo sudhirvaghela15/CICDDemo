@@ -5,13 +5,15 @@
 //  Created by sudhir on 22/06/22.
 //
 
-struct ArtworkResponse: Decodable {
+import SwiftyUserDefaults
+
+struct ArtworkResponse: Codable, DefaultsSerializable {
     var pagination: Pagination?
     var data: [ArtworkDetailModel]?
     var config: Config?
 }
 
-struct Config : Decodable {
+struct Config : Codable {
     var imageURL: String?
     var websiteURL: String?
 
@@ -21,7 +23,7 @@ struct Config : Decodable {
     }
 }
 
-struct ArtworkDetailModel: Decodable {
+struct ArtworkDetailModel: Codable {
     let title: String?
     let artistTitle: String?
     let artistDisplay: String

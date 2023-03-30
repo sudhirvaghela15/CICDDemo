@@ -10,6 +10,7 @@ import Foundation
 protocol ViewModel {
     var  isLoadingPublisher: BoxBind<Bool> { get }
     var  errorPublisher: BoxBind<Error>? { get }
+	// MARK: - required method
     func onViewDidLoad()
     func onViewWillAppear()
     func onViewDidAppear()

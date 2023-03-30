@@ -4,8 +4,7 @@
 target 'MVVMDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for MVVMDemo
-
+	
    pod 'Kingfisher', '~> 7.0'
+	 pod 'SwiftyUserDefaults', '~> 5.3'
 end

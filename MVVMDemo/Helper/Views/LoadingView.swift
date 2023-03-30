@@ -19,7 +19,12 @@ final class LoadingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetup()
+		print("IIIII00111")
     }
+	
+	deinit {
+		print("IIIIIDEINIT=00111")
+	}
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -28,6 +28,7 @@ struct ArtworkAPIResourceAccessor  {
             guard let result = result else {
                 return
             }
+			DefaultHelper.details = result
             debugPrint(result.data?.count ?? "0")
             complition(result)
         }
