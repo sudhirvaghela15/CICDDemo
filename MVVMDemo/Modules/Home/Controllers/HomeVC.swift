@@ -1,0 +1,95 @@
+//
+//  HomeVC.swift
+//  MVVMDemo
+//
+//  Created by sudhir on 22/06/22.
+//
+
+import UIKit
+
+class HomeVC : BaseViewController<HomeVM> {
+    
+
+    //MARK: - class variable
+    
+    //MARK: - IBOutlets
+    @IBOutlet weak var tblViewArtworkList: UITableView!
+    
+    //MARK: - properties
+
+    
+    //MARK: - view Life
+    override func viewDidLoad() {
+        self.viewModel = HomeVM()
+        super.viewDidLoad()
+        
+        tblArtworkListConfiguration()
+        setupBindings()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.setAnimationsEnabled(false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.setAnimationsEnabled(true)
+    }
+    
+    deinit{
+        debugPrint("---- Deinit  Home VC ------")
+    }
+    
+    //MARK: - IBActions
+    
+    //MARK: - Action(OBJC)
+    
+}
+
+
+//MARK: - Custom functions
+extension HomeVC {
+    private func updateLayout() {
+        tblViewArtworkList.beginUpdates()
+        tblViewArtworkList.endUpdates()
+        }
+    func tblArtworkListConfiguration(){
+        tblViewArtworkList.delegate = self
+        tblViewArtworkList.dataSource = self
+        tblViewArtworkList.register(HomeFeedTVC.nibID(), forCellReuseIdentifier: HomeFeedTVC.identifier)
+    }
+    func setupBindings(){
+        
+        viewModel.page.bind {[unowned self] pageNumber in
+            self.viewModel.apiCallForArtworkList()
+        }
+        
+        viewModel.homeFeedList.bind {[unowned self] homeVMList in
+            DispatchQueue.main.async {
+                self.tblViewArtworkList.reloadData()
+            }
+        }
+    }
+}
+
+//MARK: - Delegate
+extension HomeVC : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+    }
+}
+//MARK: - Datasource
+extension HomeVC : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.homeFeedList.value.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeFeedTVC.identifier, for: indexPath) as? HomeFeedTVC else {
+            return UITableViewCell()
+        }
+        let viewModel = viewModel.homeFeedList.value[indexPath.item]
+        cell.viewModel = viewModel
+        return cell
+    }
+}
