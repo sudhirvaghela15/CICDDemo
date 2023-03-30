@@ -32,4 +32,8 @@ class BaseViewModel : ViewModel {
     func onViewWillDisappear() { }
     
     func onViewDidDisappear() { }
+	
+	deinit {
+		debugPrint("deinit of ", String(describing: self))
+	}
 }

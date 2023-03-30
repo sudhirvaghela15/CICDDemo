@@ -7,12 +7,10 @@
 
 import Foundation
 
-
-
-class HomeVM : BaseViewModel {
-    private var httpUtility:HttpUtility!
+class HomeVM: BaseViewModel {
+    private var httpUtility: HttpUtility!
     var page : BoxBind<Int> = BoxBind(1)
-    var homeFeedList : BoxBind<[HomeFeedPresentable]> = BoxBind([])
+    var homeFeedList: BoxBind<[HomeFeedPresentable]> = BoxBind([])
 
     override init()
     {
@@ -22,10 +20,6 @@ class HomeVM : BaseViewModel {
     
     override func onViewDidLoad() {
         apiCallForArtworkList()
-    }
-    
-    deinit {
-        debugPrint("deinit of ", String(describing: self))
     }
 }
 
