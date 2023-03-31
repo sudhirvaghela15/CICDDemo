@@ -15,9 +15,8 @@ class HomeVC : BaseViewController<HomeVM> {
 	override func viewDidLoad() {
 		self.viewModel = HomeVM()
 		super.viewDidLoad()
-		
+		viewModel.apiCallForArtworkList()
 		tblArtworkListConfiguration()
-		setupBindings()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -30,7 +29,20 @@ class HomeVC : BaseViewController<HomeVM> {
 		UIView.setAnimationsEnabled(true)
 	}
 	
-	deinit{
+	override func setupBindings() {
+
+		viewModel.page.bind {[unowned self] pageNumber in
+			self.viewModel.apiCallForArtworkList()
+		}
+		
+		viewModel.homeFeedList.bind {[unowned self] homeVMList in
+			DispatchQueue.main.async {
+				self.tblViewArtworkList.reloadData()
+			}
+		}
+	}
+	
+	deinit {
 		debugPrint("---- Deinit  Home VC ------")
 	}
 }
@@ -49,18 +61,7 @@ extension HomeVC {
 	}
 	
 	
-	func setupBindings(){
-		
-		viewModel.page.bind {[unowned self] pageNumber in
-			self.viewModel.apiCallForArtworkList()
-		}
-		
-		viewModel.homeFeedList.bind {[unowned self] homeVMList in
-			DispatchQueue.main.async {
-				self.tblViewArtworkList.reloadData()
-			}
-		}
-	}
+	
 }
 
 //MARK: - Delegate

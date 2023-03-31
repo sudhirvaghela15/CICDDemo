@@ -8,7 +8,7 @@
 import UIKit
 
 enum Storyboard: String {
-	case feed = "Feed"
+	case feed = "Home"
 }
 
 extension UIStoryboard {

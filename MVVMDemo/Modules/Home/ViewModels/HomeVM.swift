@@ -12,14 +12,9 @@ class HomeVM: BaseViewModel {
     var page : BoxBind<Int> = BoxBind(1)
     var homeFeedList: BoxBind<[HomeFeedPresentable]> = BoxBind([])
 
-    override init()
-    {
+    override init() {
         let objHttpUtility = HttpUtility(loading: LoadingView())
         self.httpUtility = objHttpUtility
-    }
-    
-    override func onViewDidLoad() {
-        apiCallForArtworkList()
     }
 }
 
