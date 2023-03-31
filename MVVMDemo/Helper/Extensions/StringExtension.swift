@@ -8,13 +8,12 @@
 import UIKit
 
 
-//Convert to HTML
 extension String {
     /**
      **Description**
      - important: decode htm into string
-     - parameter : nothing
-     - returns: nothing
+     - parameter: nothing
+     - returns: String
      */
     var htmlDecoded: String {
         let decoded = try? NSAttributedString(data: Data(utf8), options: [
@@ -28,7 +27,7 @@ extension String {
     /**
      **Description**
      - important: Capitalize first lettere of words
-     - parameter : nothing
+     - parameter: nothing
      - returns: string
      */
     func capitalizingFirstLetter() -> String {
@@ -38,11 +37,11 @@ extension String {
     /**
      **Description**
      - important: string convert into character's array
-     - parameter : nothing
-     - returns: nothing
+     - parameter: nothing
+     - returns: [Character]
      */
     
-    var characterArray: [Character]{
+    var characterArray: [Character] {
         var characterArray = [Character]()
         for character in self {
             characterArray.append(character)
@@ -56,7 +55,7 @@ extension String {
       - important: bind regex string To predicate instance and set format.
          using evaluate compare two obj //: Find more information for [evaluate(with:substitutionVariables:)](https://developer.apple.com/documentation/foundation/nspredicate/1407759-evaluate)
   
-      - parameter : nothing
+      - parameter: nothing
       - returns: NSPredicate
      */
     var predicateExt : NSPredicate  {

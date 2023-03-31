@@ -9,7 +9,7 @@ import Foundation
 
 
 extension Encodable {
-    func convertToURLQueryItems() -> [URLQueryItem] {
+    func convertToURLQueryItems() throws -> [URLQueryItem] {
         var queryItems: [URLQueryItem] = []
         do {
             let encoder =  try JSONEncoder().encode(self)
@@ -22,8 +22,9 @@ extension Encodable {
                 queryItems.append(URLQueryItem(name: key, value: _value))
             })
         }
-        catch(let error){
+        catch(let error) {
            print("query string not decode \(error)")
+			throw error
         }
         debugPrint("convert in query Items = \(queryItems)")
         return queryItems

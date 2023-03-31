@@ -32,8 +32,8 @@ class BaseViewController<VM: ViewModel> : UIViewController {
             
 
         viewModel.errorPublisher?.bind { [weak self] error in
-                let alertController = UIAlertController(title: Localization.error, message: error.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: Localization.ok, style: .default, handler: nil)
+                let alertController = UIAlertController(title: "Localization.error", message: error.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title:"Localization.ok", style: .default, handler: nil)
                 alertController.addAction(okAction)
                 self?.present(alertController, animated: true, completion: nil)
 		}

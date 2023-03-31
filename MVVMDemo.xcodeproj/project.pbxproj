@@ -11,7 +11,9 @@
 		8BDF547629D6B6CC00085910 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */; };
 		8BDF547929D6B70F00085910 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547829D6B70F00085910 /* Localized.swift */; };
 		8BDF547B29D6B77800085910 /* Paginated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547A29D6B77800085910 /* Paginated.swift */; };
-		8BDF547E29D6B86500085910 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547D29D6B86500085910 /* UIImageView+Ext.swift */; };
+		8BDF547E29D6B86500085910 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547D29D6B86500085910 /* UIImageViewExtension.swift */; };
+		8BDF548029D6C14200085910 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547F29D6C14200085910 /* UIViewControllerExtension.swift */; };
+		8BDF548229D6C17D00085910 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF548129D6C17D00085910 /* Storyboard.swift */; };
 		AE3A26FA95C12FC89F96C834 /* Pods_MVVMDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DFBA0476557A1E47445FD4A /* Pods_MVVMDemo.framework */; };
 		F217A54F2868605000B404BA /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217A54E2868605000B404BA /* BaseVC.swift */; };
 		F217A5542868634C00B404BA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217A5532868634C00B404BA /* LoadingView.swift */; };
@@ -52,7 +54,9 @@
 		8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		8BDF547829D6B70F00085910 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		8BDF547A29D6B77800085910 /* Paginated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paginated.swift; sourceTree = "<group>"; };
-		8BDF547D29D6B86500085910 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
+		8BDF547D29D6B86500085910 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		8BDF547F29D6C14200085910 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		8BDF548129D6C17D00085910 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		F217A54E2868605000B404BA /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		F217A5532868634C00B404BA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F217A556286867D500B404BA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -135,9 +139,10 @@
 		F217A54D2868604100B404BA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */,
+				8BDF548129D6C17D00085910 /* Storyboard.swift */,
 				8BDF547829D6B70F00085910 /* Localized.swift */,
 				8BDF547A29D6B77800085910 /* Paginated.swift */,
+				8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -279,7 +284,8 @@
 				F253167628633999006C117E /* CAGradientLayerExtension.swift */,
 				F274284428637F6A00E05C0D /* EncodableExtension.swift */,
 				F274284628637F8300E05C0D /* URLExtension.swift */,
-				8BDF547D29D6B86500085910 /* UIImageView+Ext.swift */,
+				8BDF547D29D6B86500085910 /* UIImageViewExtension.swift */,
+				8BDF547F29D6C14200085910 /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -493,8 +499,10 @@
 				F2531645286331AB006C117E /* SceneDelegate.swift in Sources */,
 				8BDF547B29D6B77800085910 /* Paginated.swift in Sources */,
 				F274283E2863588000E05C0D /* ArtworkResponse.swift in Sources */,
+				8BDF548029D6C14200085910 /* UIViewControllerExtension.swift in Sources */,
 				8BDF547329D5B72700085910 /* DefaultsKeys.swift in Sources */,
-				8BDF547E29D6B86500085910 /* UIImageView+Ext.swift in Sources */,
+				8BDF548229D6C17D00085910 /* Storyboard.swift in Sources */,
+				8BDF547E29D6B86500085910 /* UIImageViewExtension.swift in Sources */,
 				F274284228635BDD00E05C0D /* Endpoints.swift in Sources */,
 				F253166828633346006C117E /* FoundationExtension.swift in Sources */,
 				F274285328643E4B00E05C0D /* ArtworkAPIResourceAccessor.swift in Sources */,

@@ -29,7 +29,7 @@ extension Double {
     }
 }
 
-extension Int{
+extension Int {
     func appendZeros() -> String {
         if (self < 10) {
             return "0\(self)"

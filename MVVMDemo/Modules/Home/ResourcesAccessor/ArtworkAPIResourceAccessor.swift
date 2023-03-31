@@ -22,7 +22,7 @@ struct ArtworkAPIResourceAccessor  {
         debugPrint("ArtworkRequest \(request)")
         let url = URL(string: "\(Endpoint.baseUrl.rawValue)\(Endpoint.artworks.rawValue)")!
         var urlComponent = URLComponents(url: url,resolvingAgainstBaseURL: false)
-            urlComponent?.queryItems = request.convertToURLQueryItems()
+            urlComponent?.queryItems = try! request.convertToURLQueryItems()
     
         httpUtility.getApiData(requestUrl: (urlComponent?.url!)!, resultType:ArtworkResponse.self) { result in
             guard let result = result else {
