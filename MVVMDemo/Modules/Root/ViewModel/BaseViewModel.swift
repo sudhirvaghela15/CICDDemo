@@ -19,7 +19,7 @@ protocol ViewModel {
 }
 
 
-class BaseViewModel : ViewModel {
+class BaseViewModel: ViewModel {
     var isLoadingPublisher: BoxBind<Bool> = BoxBind(false)
     var errorPublisher: BoxBind<Error>? = nil
 
