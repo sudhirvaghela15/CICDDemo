@@ -70,19 +70,33 @@ extension UITextField {
     }
 }
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
+
+extension UIView {
+	
+	/// laod view from nib
+	/// - Returns: UIView?
+	func getNib() -> UIView? {
+		guard
+			let nibName = type(of: self)
+			.description()
+			.components(separatedBy: ".")
+			.last,
+			!nibName.isEmpty
+		else {
+			return nil
+		}
+		let nib = UINib(nibName: nibName, bundle: Bundle(for: type(of: self)))
+		let view = nib.instantiate(withOwner: self, options: nil).first as? UIView
+		view?.backgroundColor = .clear
+		view?.frame = bounds
+		return view
+	}
+	
+	
+	/// get constraint wich match identifier
+	/// - Parameter identifier: identity
+	/// - Returns: NSLayoutConstraint?
+	func getConstraint(identifier: String) -> NSLayoutConstraint? {
+		return constraints.first(where: { $0.identifier == identifier })
+	}
 }
-
-
-
