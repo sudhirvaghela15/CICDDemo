@@ -18,7 +18,10 @@ final class MainQueueDispatchDecorator<T> {
 		guard Thread.isMainThread else {
 			return DispatchQueue.main.async(execute: completion)
 		}
-		
 		completion()
+	}
+	
+	func dispatch(with delay: DispatchTime, completion: @escaping () -> Void) {
+		return DispatchQueue.main.asyncAfter(deadline: delay, execute: completion)
 	}
 }

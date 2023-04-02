@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B5D90FB29D70A3D00EEC262 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D90FA29D70A3D00EEC262 /* URLSessionHTTPClient.swift */; };
+		8B5D90FD29D70AF100EEC262 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D90FC29D70AF100EEC262 /* HTTPClient.swift */; };
 		8BDF547329D5B72700085910 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547229D5B72700085910 /* DefaultsKeys.swift */; };
 		8BDF547629D6B6CC00085910 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */; };
 		8BDF547929D6B70F00085910 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF547829D6B70F00085910 /* Localized.swift */; };
@@ -51,6 +53,8 @@
 		0DFBA0476557A1E47445FD4A /* Pods_MVVMDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVMDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B67B69C49D208D2C7F7679 /* Pods-MVVMDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMDemo.debug.xcconfig"; path = "Target Support Files/Pods-MVVMDemo/Pods-MVVMDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		7BE7886EFFFA9420F6B53D01 /* Pods-MVVMDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMDemo.release.xcconfig"; path = "Target Support Files/Pods-MVVMDemo/Pods-MVVMDemo.release.xcconfig"; sourceTree = "<group>"; };
+		8B5D90FA29D70A3D00EEC262 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		8B5D90FC29D70AF100EEC262 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8BDF547229D5B72700085910 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		8BDF547529D6B6CC00085910 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		8BDF547829D6B70F00085910 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
@@ -104,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B5D90F929D70A2E00EEC262 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				8B5D90FC29D70AF100EEC262 /* HTTPClient.swift */,
+				8B5D90FA29D70A3D00EEC262 /* URLSessionHTTPClient.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 		8BDF547729D6B6E300085910 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +349,7 @@
 		F253166E28633427006C117E /* UtilityServices */ = {
 			isa = PBXGroup;
 			children = (
+				8B5D90F929D70A2E00EEC262 /* HTTP */,
 				F274284028635BC700E05C0D /* HttpUtility */,
 				F217A55B28687D7600B404BA /* UserDefaultsUtility */,
 			);
@@ -499,6 +513,7 @@
 				F217A5542868634C00B404BA /* LoadingView.swift in Sources */,
 				F274284E286392FF00E05C0D /* HomeVM.swift in Sources */,
 				F27428552864409500E05C0D /* ArtworkRequest.swift in Sources */,
+				8B5D90FD29D70AF100EEC262 /* HTTPClient.swift in Sources */,
 				F274283C28633E5800E05C0D /* UserDefaultsUtility.swift in Sources */,
 				8BDF547629D6B6CC00085910 /* MainQueueDispatchDecorator.swift in Sources */,
 				8BDF548529D6C26100085910 /* BaseView.swift in Sources */,
@@ -513,6 +528,7 @@
 				F274283E2863588000E05C0D /* ArtworkResponse.swift in Sources */,
 				8BDF548029D6C14200085910 /* UIViewControllerExtension.swift in Sources */,
 				8BDF547329D5B72700085910 /* DefaultsKeys.swift in Sources */,
+				8B5D90FB29D70A3D00EEC262 /* URLSessionHTTPClient.swift in Sources */,
 				8BDF548229D6C17D00085910 /* Storyboard.swift in Sources */,
 				8BDF547E29D6B86500085910 /* UIImageViewExtension.swift in Sources */,
 				F274284228635BDD00E05C0D /* Endpoints.swift in Sources */,

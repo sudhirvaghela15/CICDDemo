@@ -17,7 +17,7 @@ struct ArtworkAPIResourceAccessor  {
     
     func getArtworkList(page:Int,complition:@escaping(ArtworkResponse)->Void){
         print("_____________")
-        let request = ArtworkRequest(page: page)
+		let request = ArtworkRequest.build(page: page)
         
         debugPrint("ArtworkRequest \(request)")
         let url = URL(string: "\(Endpoint.baseUrl.rawValue)\(Endpoint.artworks.rawValue)")!
@@ -35,3 +35,32 @@ struct ArtworkAPIResourceAccessor  {
     }
 }
 
+
+struct ArtworkRepo {
+	
+	private let client: HTTPClient
+	
+	init(client: HTTPClient) {
+		self.client = client
+	}
+	
+	
+	func getArtworkList(request: ArtworkRequest = ArtworkRequest.build(), completion: @escaping RemoteResultCallback) {
+		
+		var urlComponent = URLComponents(
+			url: URL(string: "\(Endpoint.baseUrl.rawValue)\(Endpoint.artworks.rawValue)")!,
+			resolvingAgainstBaseURL: false
+		)
+			urlComponent?.queryItems = try! request.convertToURLQueryItems()
+		
+		client.get(from: (urlComponent?.url)!, completion: completion)
+		
+	}
+}
+
+
+
+
+
+// MARK: -  Helper
+typealias RemoteResultCallback = (HTTPClient.Result) -> Void
