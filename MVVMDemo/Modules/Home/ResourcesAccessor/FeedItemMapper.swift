@@ -76,7 +76,7 @@ public enum ValidationType {
 			case .successCodes:
 				return Array(200..<300)
 			case .successAndRedirectiondCodes:
-				return Array(300...400)
+				return Array(200...400)
 		}
 	}
 }
