@@ -15,7 +15,7 @@ class HomeVC : BaseViewController<HomeVM> {
 	override func viewDidLoad() {
 		self.viewModel = HomeVM()
 		super.viewDidLoad()
-		viewModel.apiCallForArtworkList()
+//		viewModel.apiCallForArtworkList()
 		tblArtworkListConfiguration()
 	}
 	
@@ -32,7 +32,7 @@ class HomeVC : BaseViewController<HomeVM> {
 	override func setupBindings() {
 
 		viewModel.page.bind {[unowned self] pageNumber in
-			self.viewModel.apiCallForArtworkList()
+//			self.viewModel.apiCallForArtworkList()
 		}
 		
 		viewModel.homeFeedList.bind {[unowned self] homeVMList in

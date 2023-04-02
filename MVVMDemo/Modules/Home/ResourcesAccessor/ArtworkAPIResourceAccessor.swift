@@ -5,62 +5,35 @@
 //  Created by sudhir on 23/06/22.
 //
 
-import UIKit
+import Foundation
 
-struct ArtworkAPIResourceAccessor  {
-    
-    private let httpUtility: HttpUtility!
-    init(httpUtility : HttpUtility)
-    {
-        self.httpUtility = httpUtility
-    }
-    
-    func getArtworkList(page:Int,complition:@escaping(ArtworkResponse)->Void){
-        print("_____________")
-		let request = ArtworkRequest.build(page: page)
-        
-        debugPrint("ArtworkRequest \(request)")
-        let url = URL(string: "\(Endpoint.baseUrl.rawValue)\(Endpoint.artworks.rawValue)")!
-        var urlComponent = URLComponents(url: url,resolvingAgainstBaseURL: false)
-            urlComponent?.queryItems = try! request.convertToURLQueryItems()
-    
-        httpUtility.getApiData(requestUrl: (urlComponent?.url!)!, resultType:ArtworkResponse.self) { result in
-            guard let result = result else {
-                return
-            }
-			DefaultHelper.details = result
-            debugPrint(result.data?.count ?? "0")
-            complition(result)
-        }
-    }
-}
-
-
-struct ArtworkRepo {
+final class ArtworkLoader {
+	
+	public typealias Result = Swift.Result<[ArtworkDetailModel], Error>
 	
 	private let client: HTTPClient
+	private let url: URL
 	
-	init(client: HTTPClient) {
+	public enum Error: Swift.Error {
+		case connectivity
+		case invalidData
+	}
+	
+	public init(url: URL, client: HTTPClient) {
+		self.url = url
 		self.client = client
 	}
 	
-	
-	func getArtworkList(request: ArtworkRequest = ArtworkRequest.build(), completion: @escaping RemoteResultCallback) {
-		
-		var urlComponent = URLComponents(
-			url: URL(string: "\(Endpoint.baseUrl.rawValue)\(Endpoint.artworks.rawValue)")!,
-			resolvingAgainstBaseURL: false
-		)
-			urlComponent?.queryItems = try! request.convertToURLQueryItems()
-		
-		client.get(from: (urlComponent?.url)!, completion: completion)
-		
+	public func load(completion: @escaping (Result) -> Void) {
+		client.get(from: url) { [weak self] result in
+			guard self != nil else { return } /// added berriear for check if self is nil api result do not deliver
+			
+			switch result {
+			case let .success((data, httpResponse )):
+				completion(FeedItemMapper.map(data, httpResponse: httpResponse))
+			case .failure:
+				completion(.failure(Error.connectivity))
+			}
+		}
 	}
 }
-
-
-
-
-
-// MARK: -  Helper
-typealias RemoteResultCallback = (HTTPClient.Result) -> Void
