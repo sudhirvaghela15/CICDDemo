@@ -9,25 +9,26 @@ import Foundation
 
 final class ArtworkLoader {
 	
-	public typealias Result = Swift.Result<[ArtworkDetailModel], Error>
+	public typealias Result = Swift.Result<ArtworkResponse, Error>
 	
 	private let client: HTTPClient
-	private let url: URL
+	var service: Service
 	
 	public enum Error: Swift.Error {
 		case connectivity
 		case invalidData
 	}
 	
-	public init(url: URL, client: HTTPClient) {
-		self.url = url
+	public init(service: Service, client: HTTPClient) {
+		self.service = service
 		self.client = client
 	}
 	
+	
 	public func load(completion: @escaping (Result) -> Void) {
-		client.get(from: url) { [weak self] result in
+		client.get(from:  createRequestURL(service: service)) { [weak self] result in
 			guard self != nil else { return } /// added berriear for check if self is nil api result do not deliver
-			
+
 			switch result {
 			case let .success((data, httpResponse )):
 				completion(FeedItemMapper.map(data, httpResponse: httpResponse))
@@ -35,5 +36,21 @@ final class ArtworkLoader {
 				completion(.failure(Error.connectivity))
 			}
 		}
+	}
+	
+	
+	
+	func createRequestURL(service: Service) -> URL {
+		let url = URL(string: "\(service.baseURL.absoluteURL)\(service.path)")!
+		switch service.task {
+		case .requestPlain:
+			return url
+		case let .requestParameters(params):
+				var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+				let params = params.convertToURLQueryItems()
+				components?.queryItems = params
+				return components?.url ?? url
+		}
+		
 	}
 }

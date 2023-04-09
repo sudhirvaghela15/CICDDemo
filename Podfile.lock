@@ -4,7 +4,7 @@ PODS:
 
 DEPENDENCIES:
   - Kingfisher (~> 7.0)
-  - SwiftyUserDefaults (~> 5.3)
+  - SwiftyUserDefaults
 
 SPEC REPOS:
   trunk:
@@ -15,6 +15,6 @@ SPEC CHECKSUMS:
   Kingfisher: 2457be2121734e69e54a2312ecc0150eb9ae70b3
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
 
-PODFILE CHECKSUM: 244a0b73de63bc3b623b19e0a93cf85dd0cf3fb1
+PODFILE CHECKSUM: cf769a345ea97d65e0e4510fee9cb273e9b33607
 
 COCOAPODS: 1.11.3

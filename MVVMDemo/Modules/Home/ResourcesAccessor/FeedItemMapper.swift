@@ -5,6 +5,7 @@
 //  Created by sudhir on 02/04/23.
 //
 
+
 import Foundation
 
 final class FeedItemMapper {
@@ -14,25 +15,81 @@ final class FeedItemMapper {
 			  let root = try? JSONDecoder().decode(ArtworkResponse.self, from: data) else {
 			return .failure(ArtworkLoader.Error.invalidData)
 		}
-		return .success(root.data ?? [])
+		return .success(root)
 	}
 	
 }
 
-//case base = "https://api.artic.edu/api/v1"
-//case artworks = "/artworks"
-//case imageSuffix = "/full/843,/0/default.jpg"
+// case base = "https://api.artic.edu/api/v1"
+// case artworks = "/artworks"
+// case imageSuffix = "/full/843,/0/default.jpg"
 
 public enum Service {
-	case getArtwork(QueryParams: Encodable?, BodyParams: Encodable?)
+	case getArtwork(QueryParams: Encodable?)
 }
 
 
-extension Service {
+extension Service: TargetType {
+	
+	private var baseStr: String {
+		get {
+			return WebServiceHelper.baseURL+WebServiceHelper.baseVersion + "/"
+		}
+	}
+	
+	public var baseURL: URL {
+		return URL(string: baseStr)!
+	}
+	
+	public var path: String {
+		switch self {
+		case .getArtwork(_):
+			return "artworks"
+		}
+	}
+	
+	public var method: HTTPMethod {
+		switch self {
+			
+		default:
+			return .get
+		}
+	}
+	
+	public var sampleData: Data {
+		return Data()
+	}
+	
+	public var headers: [String : String] {
+		var params = Dictionary<String, String>()
+		params["x-dw-client-id"] = ""
+		params["Content-Type"] = "application/json"
+		
+		
+		switch self {
+		default:
+			break
+//			if let value = AuthHelper.bearerToken {
+//				params["Authorization"] = value
+//			}
+		}
+		return params
+	}
+	
+	public var task: RequestTask {
+		switch self {
+		case .getArtwork(QueryParams: let QueryParams):
+			if let params = QueryParams {
+				return .requestParameters(params)
+			}
+			return .requestPlain
+		}
+	}
+}
+
+struct EmptyModel: Encodable {
 	
 }
-
-
 
 
 public protocol TargetType {
@@ -50,15 +107,11 @@ public protocol TargetType {
 	
 	/// the headers to be used in the request.
 	var headers: [String: String] { get }
+	
+	var task: RequestTask { get }
 }
 
-
-
-
-
-
-
-
+// MARK: - Validation Type
 public enum ValidationType {
 	/// No validataion
 	case none
@@ -79,4 +132,34 @@ public enum ValidationType {
 				return Array(200...400)
 		}
 	}
+}
+
+
+// MARK: - WebService Helper
+public class WebServiceHelper {
+	
+	public enum ApiVersion: String {
+		case v1
+	}
+	
+	static var baseURL: String {
+		get {
+		return	"https://api.artic.edu/api/"
+		}
+	}
+	
+	static var baseVersion: String {
+		get {
+			return	ApiVersion.v1.rawValue
+		}
+	}
+	
+}
+
+/// Represents an HTTP task.
+public enum RequestTask {
+	/// A request with no additional data.
+	case requestPlain
+	/// A requests body set with encoded parameters.
+	case requestParameters(_ parameters: Encodable)
 }

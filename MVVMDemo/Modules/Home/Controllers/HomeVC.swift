@@ -7,15 +7,14 @@
 
 import UIKit
 
-class HomeVC : BaseViewController<HomeVM> {
+class HomeVC: BaseViewController<HomeVM> {
 	
 	@IBOutlet weak var tblViewArtworkList: UITableView!
 	
-	
 	override func viewDidLoad() {
-		self.viewModel = HomeVM()
+		self.viewModel = HomeVM(session: URLSessionHTTPClient(session: .shared))
 		super.viewDidLoad()
-//		viewModel.apiCallForArtworkList()
+		viewModel.page.value = 0
 		tblArtworkListConfiguration()
 	}
 	
@@ -30,14 +29,14 @@ class HomeVC : BaseViewController<HomeVM> {
 	}
 	
 	override func setupBindings() {
-
-		viewModel.page.bind {[unowned self] pageNumber in
-//			self.viewModel.apiCallForArtworkList()
+		super.setupBindings()
+		viewModel.page.bind {[weak self] pageNumber in
+			self?.viewModel.getArtwokrFromRemote()
 		}
 		
-		viewModel.homeFeedList.bind {[unowned self] homeVMList in
+		viewModel.homeFeedList.bind {[weak self] homeVMList in
 			DispatchQueue.main.async {
-				self.tblViewArtworkList.reloadData()
+				self?.tblViewArtworkList.reloadData()
 			}
 		}
 	}

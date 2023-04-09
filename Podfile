@@ -6,5 +6,5 @@ target 'MVVMDemo' do
   use_frameworks!
 	
    pod 'Kingfisher', '~> 7.0'
-	 pod 'SwiftyUserDefaults', '~> 5.3'
+	 pod 'SwiftyUserDefaults'
 end
